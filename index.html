@@ -41,11 +41,23 @@
         <div class="page-title"><p class="eyebrow">PRENDS NOTE</p><h1>Mon journal</h1><p>Enregistre ce que tu ressens aujourd’hui.</p></div>
         <article class="form-card"><label class="field-label" for="logDate">Date</label><input type="date" id="logDate" />
           <p class="field-label">Flux menstruel</p><div class="choice-row" id="flowChoices"><button class="choice" data-flow="Léger">Léger</button><button class="choice" data-flow="Moyen">Moyen</button><button class="choice" data-flow="Abondant">Abondant</button></div>
+          <label class="field-label" for="painLevel">Intensité de la douleur <span class="optional">(0 = aucune, 10 = très forte)</span></label><div class="range-row"><input type="range" id="painLevel" min="0" max="10" value="0"/><strong id="painValue">0</strong></div>
+          <p class="field-label">Tes activités ont-elles été perturbées ?</p><div class="choice-row impact-row" id="impactChoices"><button class="choice" data-impact="Non">Non</button><button class="choice" data-impact="Un peu">Un peu</button><button class="choice" data-impact="Beaucoup">Beaucoup</button></div>
           <p class="field-label">Symptômes</p><div class="symptom-options" id="symptomOptions"><button class="symptom-option" data-symptom="Crampes">Crampes</button><button class="symptom-option" data-symptom="Maux de tête">Maux de tête</button><button class="symptom-option" data-symptom="Fatigue">Fatigue</button><button class="symptom-option" data-symptom="Ballonnements">Ballonnements</button><button class="symptom-option" data-symptom="Acné">Acné</button><button class="symptom-option" data-symptom="Seins sensibles">Seins sensibles</button></div>
           <label class="field-label" for="noteText">Note personnelle <span class="optional">(facultatif)</span></label><textarea id="noteText" rows="3" placeholder="Comment s’est passée ta journée ?"></textarea>
           <button class="primary-button full" id="saveEntryBtn">Enregistrer ma note</button>
         </article>
         <div class="section-heading"><div><p class="eyebrow">RÉCENT</p><h2>Dernières notes</h2></div></div><div class="entry-list" id="entryList"></div>
+      </section>
+
+      <section class="view" id="helpView">
+        <div class="page-title"><p class="eyebrow">INFORMATIONS ET SOUTIEN</p><h1>Comprendre mes règles</h1><p>Des repères simples pour mieux connaître ton cycle et prendre soin de toi.</p></div>
+        <article class="info-card help-card"><div class="info-icon">✿</div><div><h3>Les règles et le cycle</h3><p>La durée et les symptômes peuvent varier d’une personne à l’autre. Note tes dates et ce que tu ressens pour mieux décrire tes habitudes au fil du temps.</p></div></article>
+        <article class="info-card help-card"><div class="info-icon">☼</div><div><h3>Hygiène menstruelle</h3><p>Choisis une protection adaptée à tes besoins et change-la ou nettoie-la selon les consignes du produit. Pour une protection réutilisable, lave-la et laisse-la sécher complètement avant de la réutiliser.</p></div></article>
+        <article class="care-card"><div class="care-icon">♥</div><div><p class="eyebrow">QUAND DEMANDER UN AVIS DE SANTÉ</p><h3>Tu as le droit de demander de l’aide.</h3><p>Parle à un professionnel de santé si la douleur, les saignements abondants, les règles rares ou absentes, ou des changements d’humeur perturbent ta vie quotidienne ou t’inquiètent. Cette application ne peut pas déterminer la cause de ces symptômes.</p></div></article>
+        <div class="section-heading"><div><p class="eyebrow">MES PROTECTIONS</p><h2>Prévoir mon budget</h2></div></div>
+        <article class="form-card product-card"><p class="helper-copy">Note tes dépenses liées aux protections pour suivre ton budget mensuel. Cette information reste enregistrée sur cet appareil.</p><label class="field-label" for="productType">Type de protection</label><select id="productType"><option>Serviettes jetables</option><option>Serviettes réutilisables</option><option>Tampons</option><option>Cup menstruelle</option><option>Culotte menstruelle</option><option>Autre</option></select><label class="field-label" for="productCost">Montant dépensé (FCFA)</label><input type="number" id="productCost" min="0" inputmode="numeric" placeholder="Ex. 1000"/><button class="primary-button full" id="addExpenseBtn">Ajouter cette dépense</button><div class="budget-total"><span>Dépenses notées ce mois-ci</span><strong id="monthlySpend">0 FCFA</strong></div><div class="expense-list" id="expenseList"></div></article>
+        <aside class="note"><span>🔒</span><p>Numaïa enregistre tes notes et dépenses dans le navigateur de cet appareil. Ne partage pas ton téléphone si tu souhaites garder ces informations privées.</p></aside>
       </section>
 
       <section class="view" id="insightsView">
@@ -62,7 +74,7 @@
       </section>
     </main>
 
-    <nav class="bottom-nav" aria-label="Navigation principale"><button class="nav-item active" data-nav="home"><span>⌂</span><small>Accueil</small></button><button class="nav-item" data-nav="calendar"><span>▦</span><small>Calendrier</small></button><button class="nav-item" data-nav="journal"><span>＋</span><small>Journal</small></button><button class="nav-item" data-nav="insights"><span>⌁</span><small>Tendances</small></button></nav>
+    <nav class="bottom-nav" aria-label="Navigation principale"><button class="nav-item active" data-nav="home"><span>⌂</span><small>Accueil</small></button><button class="nav-item" data-nav="calendar"><span>▦</span><small>Calendrier</small></button><button class="nav-item" data-nav="journal"><span>＋</span><small>Journal</small></button><button class="nav-item" data-nav="insights"><span>⌁</span><small>Tendances</small></button><button class="nav-item" data-nav="help"><span>♡</span><small>Aide</small></button></nav>
   </div>
   <dialog id="periodDialog"><form method="dialog" class="dialog-card"><button class="dialog-close" aria-label="Fermer">×</button><p class="eyebrow">NOUVEAU CYCLE</p><h2>Quand tes règles ont-elles commencé ?</h2><label class="field-label" for="periodStartDate">Date de début</label><input type="date" id="periodStartDate"/><p class="muted small-text">Tu pourras ajouter la date de fin dans ton journal.</p><button class="primary-button full" id="confirmPeriodBtn" value="default">Enregistrer</button></form></dialog>
   <div class="toast" id="toast" role="status"></div>
