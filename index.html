@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#fff8f5" />
+  <title>Numaïa — carnet menstruel</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#accueil" aria-label="Numaïa, accueil"><span class="brand-mark">n</span><span>numaïa</span></a>
+      <button class="icon-button" id="settingsBtn" aria-label="Paramètres">⚙</button>
+    </header>
+
+    <main>
+      <section class="view active" id="homeView">
+        <div class="greeting"><div><p class="eyebrow" id="todayLabel">MON CYCLE</p><h1>Bonjour 🌷</h1></div><button class="avatar" aria-label="Profil">A</button></div>
+        <article class="cycle-card">
+          <div class="cycle-card-top"><span class="pill" id="phasePill">APERÇU DU CYCLE</span><span class="cycle-day" id="cycleDay">—</span></div>
+          <div class="cycle-forecast"><div><p class="muted" id="forecastLabel">Prochaines règles estimées</p><h2 id="forecastDate">À renseigner</h2><p class="muted" id="forecastSub">Ajoute tes dernières règles pour commencer.</p></div><div class="cycle-orbit"><div class="orbit-inner"><span id="countdown">—</span><small>jours</small></div></div></div>
+          <div class="cycle-progress"><span id="progressFill"></span></div><div class="cycle-progress-labels"><span>Règles</span><span>Prochain cycle</span></div>
+        </article>
+
+        <div class="section-heading"><div><p class="eyebrow">AUJOURD’HUI</p><h2>Comment te sens-tu ?</h2></div><button class="text-button" data-view="journal">Voir le journal</button></div>
+        <article class="checkin-card"><p>Quelques notes peuvent t’aider à repérer tes habitudes au fil des cycles.</p><div class="mood-row" id="moodRow"><button class="mood" data-mood="Bien"><span>😊</span><small>Bien</small></button><button class="mood" data-mood="Sensible"><span>🥲</span><small>Sensible</small></button><button class="mood" data-mood="Fatiguée"><span>😴</span><small>Fatiguée</small></button><button class="mood" data-mood="Douloureuse"><span>😣</span><small>Douleur</small></button><button class="mood" data-mood="Énergique"><span>⚡</span><small>Énergique</small></button></div><div class="symptom-line"><span>Symptômes du jour</span><button class="add-link" data-view="journal">＋ Ajouter</button></div><div class="symptom-chips" id="homeSymptoms"><span class="empty-chip">Aucun symptôme noté</span></div></article>
+
+        <div class="section-heading"><div><p class="eyebrow">TES DONNÉES</p><h2>Un aperçu de ton cycle</h2></div><button class="text-button" data-view="insights">Voir tout</button></div>
+        <div class="stats-grid"><article class="stat-card"><span class="stat-icon pink">◷</span><p>Durée moyenne</p><strong id="avgCycle">—</strong></article><article class="stat-card"><span class="stat-icon lilac">♥</span><p>Dernières règles</p><strong id="lastPeriod">—</strong></article></div>
+      </section>
+
+      <section class="view" id="calendarView">
+        <div class="page-title"><p class="eyebrow">TON HISTORIQUE</p><h1>Calendrier</h1><p>Consulte tes cycles et ajoute tes règles.</p></div>
+        <article class="calendar-card"><div class="month-nav"><button class="icon-button" id="prevMonth" aria-label="Mois précédent">‹</button><h2 id="monthTitle"></h2><button class="icon-button" id="nextMonth" aria-label="Mois suivant">›</button></div><div class="calendar-grid weekday"><span>Lu</span><span>Ma</span><span>Me</span><span>Je</span><span>Ve</span><span>Sa</span><span>Di</span></div><div class="calendar-grid" id="calendarGrid"></div><div class="legend"><span><i class="legend-dot period"></i>Règles notées</span><span><i class="legend-dot estimate"></i>Estimation</span></div></article>
+        <div class="calendar-actions"><button class="primary-button" id="logPeriodBtn">＋ Noter mes règles</button><button class="secondary-button" data-view="journal">Ajouter un symptôme</button></div>
+        <aside class="note"><span>ⓘ</span><p>Les dates prédites sont des estimations basées sur les informations saisies. Elles ne permettent pas de diagnostiquer un problème de santé ni d’éviter une grossesse.</p></aside>
+      </section>
+
+      <section class="view" id="journalView">
+        <div class="page-title"><p class="eyebrow">PRENDS NOTE</p><h1>Mon journal</h1><p>Enregistre ce que tu ressens aujourd’hui.</p></div>
+        <article class="form-card"><label class="field-label" for="logDate">Date</label><input type="date" id="logDate" />
+          <p class="field-label">Flux menstruel</p><div class="choice-row" id="flowChoices"><button class="choice" data-flow="Léger">Léger</button><button class="choice" data-flow="Moyen">Moyen</button><button class="choice" data-flow="Abondant">Abondant</button></div>
+          <p class="field-label">Symptômes</p><div class="symptom-options" id="symptomOptions"><button class="symptom-option" data-symptom="Crampes">Crampes</button><button class="symptom-option" data-symptom="Maux de tête">Maux de tête</button><button class="symptom-option" data-symptom="Fatigue">Fatigue</button><button class="symptom-option" data-symptom="Ballonnements">Ballonnements</button><button class="symptom-option" data-symptom="Acné">Acné</button><button class="symptom-option" data-symptom="Seins sensibles">Seins sensibles</button></div>
+          <label class="field-label" for="noteText">Note personnelle <span class="optional">(facultatif)</span></label><textarea id="noteText" rows="3" placeholder="Comment s’est passée ta journée ?"></textarea>
+          <button class="primary-button full" id="saveEntryBtn">Enregistrer ma note</button>
+        </article>
+        <div class="section-heading"><div><p class="eyebrow">RÉCENT</p><h2>Dernières notes</h2></div></div><div class="entry-list" id="entryList"></div>
+      </section>
+
+      <section class="view" id="insightsView">
+        <div class="page-title"><p class="eyebrow">APPRENDS À TE CONNAÎTRE</p><h1>Tendances</h1><p>Un aperçu calculé à partir de tes cycles enregistrés.</p></div>
+        <div class="stats-grid large"><article class="stat-card"><span class="stat-icon pink">◷</span><p>Durée moyenne du cycle</p><strong id="insightCycle">—</strong><small>Calculée lorsque tu as noté au moins deux débuts de règles.</small></article><article class="stat-card"><span class="stat-icon coral">♥</span><p>Durée moyenne des règles</p><strong id="insightPeriod">—</strong><small>Basée sur les périodes renseignées.</small></article></div>
+        <article class="info-card"><div class="info-icon">✦</div><div><h3>Les tendances prennent du temps</h3><p>Note régulièrement tes règles et tes symptômes. Les estimations s’ajusteront à ton historique et peuvent rester imprécises, en particulier si tes cycles sont irréguliers.</p></div></article>
+      </section>
+
+      <section class="view" id="settingsView">
+        <div class="page-title"><p class="eyebrow">TES PRÉFÉRENCES</p><h1>Paramètres</h1><p>Configure ton suivi et gère tes données.</p></div>
+        <article class="form-card settings-card"><label class="field-label" for="cycleLength">Durée habituelle du cycle (jours)</label><input type="number" id="cycleLength" min="15" max="60" value="28"/><label class="field-label" for="periodLength">Durée habituelle des règles (jours)</label><input type="number" id="periodLength" min="1" max="12" value="5"/><button class="primary-button full" id="saveSettingsBtn">Enregistrer les préférences</button></article>
+        <article class="info-card privacy-card"><div class="info-icon">⌂</div><div><h3>Tes données restent sur cet appareil</h3><p>Cette maquette enregistre les informations localement dans le navigateur. Elles ne sont pas envoyées à un serveur. Efface les données du navigateur pour les supprimer.</p></div></article>
+        <button class="danger-button" id="resetBtn">Effacer toutes mes données</button>
+      </section>
+    </main>
+
+    <nav class="bottom-nav" aria-label="Navigation principale"><button class="nav-item active" data-nav="home"><span>⌂</span><small>Accueil</small></button><button class="nav-item" data-nav="calendar"><span>▦</span><small>Calendrier</small></button><button class="nav-item" data-nav="journal"><span>＋</span><small>Journal</small></button><button class="nav-item" data-nav="insights"><span>⌁</span><small>Tendances</small></button></nav>
+  </div>
+  <dialog id="periodDialog"><form method="dialog" class="dialog-card"><button class="dialog-close" aria-label="Fermer">×</button><p class="eyebrow">NOUVEAU CYCLE</p><h2>Quand tes règles ont-elles commencé ?</h2><label class="field-label" for="periodStartDate">Date de début</label><input type="date" id="periodStartDate"/><p class="muted small-text">Tu pourras ajouter la date de fin dans ton journal.</p><button class="primary-button full" id="confirmPeriodBtn" value="default">Enregistrer</button></form></dialog>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="app.js"></script>
+</body>
+</html>
